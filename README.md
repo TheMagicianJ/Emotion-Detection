@@ -12,5 +12,6 @@ Lastly, I will use a set of real pictures seperate from the data set, to test th
 The specifics for analysis are not yet fully set.
 
 K-folds = 
+
 Maximum time for training = 1 hours
 
