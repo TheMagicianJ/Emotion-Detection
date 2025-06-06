@@ -10,11 +10,9 @@ class FaceDetector():
         self.faceDetection = self.mpFaceDetection.FaceDetection(0.75)
 
 
-    def findFaces(self, img):
+    def findFace(self, img):
 
         self.results = self.faceDetection.process(img)
-        
-        faces = []
 
         face_top_corner = 0
         face_bottom_corner = 0
@@ -28,11 +26,11 @@ class FaceDetector():
 
                 face_bottom_corner = int(fbboxC.xmin * w),int(fbboxC.ymin * h)
                 face_top_corner = int((fbboxC.xmin + fbboxC.width) * w), int((fbboxC.ymin + fbboxC.height) * h)
-                faces.append([face_bottom_corner, face_top_corner])
+                face = (face_bottom_corner, face_top_corner)
                  
                 cv2.rectangle(img, face_bottom_corner, face_top_corner, (255,30,30), 1)
 
-        return img, faces
+        return img, face
 
        
 def main():
