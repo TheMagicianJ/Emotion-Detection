@@ -68,6 +68,7 @@ for image in imgList:
       cv2.imwrite(image,img)
 
       #Convert to npArray?
+      #One hot encoding?
 
 
 
