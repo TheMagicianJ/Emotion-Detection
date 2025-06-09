@@ -31,7 +31,7 @@ class MaxPooling(Layer):
                     
                     # Finding the max in an n x m sized window at depth d
                     
-                    self.output[w,h,d] = input[w*self.window[0]:w*self.window[0] + self.window[0], h*self.window[1]: h*self.window[1] + self.window[1],d] .max()
+                    self.output[w,h,d] = input[w*self.window[0]:w*self.stride + self.window[0], h*self.window[1]: h*self.stride + self.window[1],d] .max()
 
                     self.max_positions = np.where(input == self.output[w,h,d])
 
@@ -53,7 +53,7 @@ class MaxPooling(Layer):
                     # Finding the max in an n x m sized window at depth d
                     # Adds the error gradient to the array only where the max is found. Boolean at the end determines whether its is added or not as the max is either found there (1) or not (0).
                     
-                    backprop[w*self.window[0]:w*self.window[0] + self.window[0], h*self.window[1]: h*self.window[1] + self.window[1],d] = output_grad[w:w+1,h:h+1,d] * (self.output[w:w+1,h:h+1,d] == self.input[w*self.window[0]:w*self.window[0] + self.window[0], h*self.window[1]: h*self.window[1] + self.window[1],d] .max())
+                    backprop[w*self.window[0]:w*self.stride + self.window[0], h*self.window[1]: h*self.stride + self.window[1],d] = output_grad[w:w+1,h:h+1,d] * (self.output[w:w+1,h:h+1,d] == self.input[w*self.window[0]:w*self.stride + self.window[0], h*self.window[1]: h*self.stride + self.window[1],d] .max())
 
             return backprop
 
