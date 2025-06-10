@@ -1,6 +1,8 @@
 from Layer import Layer
 import numpy as np
 
+# To-do: Annotations
+
 class Dense(Layer):
     
     def __init__(self, input_size, output_size):
@@ -17,10 +19,10 @@ class Dense(Layer):
     
 
 
-    def backward(self, output_gradient, learning_rate, optimizer):
+    def backward(self, output_grad, learning_rate):
 
-        weights_gradient = np.dot(output_gradient, self.input.T)
+        weights_gradient = np.dot(output_grad, self.input.T)
         self.weights -= learning_rate * weights_gradient
-        self.bias -= learning_rate * output_gradient
+        self.bias -= learning_rate * output_grad
 
-        return np.dot(self.weights.T, output_gradient)
+        return np.dot(self.weights.T, output_grad)

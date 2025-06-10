@@ -11,16 +11,13 @@ FILE_PATH = ""
 
 face_detector = fd.FaceDetector()
 
-# Testing - Drawing Utility
-
-drawlms = mp.solutions.drawing_utils
-
+# To-do: Get rid of FaceDetection module and put it here.
 
 def findFace(img):
         
         # Face Detection
 
-        img, face = face_detector.findFaces(img)
+        img, face = face_detector.findFace(img)
 
         return img, face
 

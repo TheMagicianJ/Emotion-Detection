@@ -24,9 +24,9 @@ class ConvultionLayer(Layer):
         # The depth of the kernels 
         self.kernels_shape = (depth, input_depth, kernel_size, kernel_size)
 
-        #Kernels and biases first set to be random
-        self.kernels = np.random.randn(self.kernel_shape)
-        self.biases = np.random.randn(self.output_shape)
+        #Kernels and biases first set to be random. Needs to take the arguments rather than a tuple.
+        self.kernels = np.random.randn(*self.kernels_shape)
+        self.biases = np.random.randn(*self.output_shape)
 
 
 
@@ -58,7 +58,7 @@ class ConvultionLayer(Layer):
             for j in range(self.input_depth):
                 
                 # The kernel error is the input cross correlated with the error given the output
-                kernels_gradient[i, j] = signal.correlated2d(self.input[j], output_gradient[i], "valid")
+                kernels_gradient[i, j] = signal.correlate2d(self.input[j], output_gradient[i], "valid")
 
                 # The change to the input gradient the error given the output fully convolved with the kernels
                 input_gradient[j] += signal.convolve2d(output_gradient, self.kernels[i, j], "full")

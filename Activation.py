@@ -1,6 +1,7 @@
 import numpy as np
 from Layer import Layer
 
+#TO-DO: Annontations
 
 class Activation(Layer):
 

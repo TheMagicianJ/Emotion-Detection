@@ -8,8 +8,8 @@ class Layer:
 
     def forward(self, input):
 
-        pass
+        return input
 
-    def backward(self, output_grad, learning_rate, optimizer):
-
-        pass
+    def backward(self, output_grad, learning_rate):
+        
+        return output_grad
