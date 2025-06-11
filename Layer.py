@@ -1,4 +1,4 @@
-
+# Basic functionality of all classes. All Layers from the networks will override and inherit from the class.
 class Layer:
 
     def __init__(self):

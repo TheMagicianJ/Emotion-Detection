@@ -7,11 +7,12 @@ class Activation(Layer):
 
     def __init__(self, activation, activation_prime):
 
+        # Activation function for propragation.
         self.activation = activation
+        # Backwards propagation activation is the inverse of the forward which means they have to be individually defined.
         self.activation_prime = activation_prime
 
         
-
     def forward(self, input):
         self.input = input
 
