@@ -38,6 +38,7 @@ def crop(img, face):
 def reSize(img,dimensions):
       
       #Resizing the img to the input size of network
+
       img = cv2.resize(img, dimensions)
       
       return 
@@ -68,6 +69,7 @@ for image in imgList:
       cv2.imwrite(image,img)
 
       #TO:Do One hot encoding for emotions.
+      # TO:DO Reshape to [depth,width,height]
 
 
 

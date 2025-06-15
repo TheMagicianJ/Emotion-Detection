@@ -2,7 +2,7 @@ import numpy as np
 from Layer import Layer
 from scipy import signal
 
-class ConvultionLayer(Layer):
+class ConvolutionLayer(Layer):
 
 
 
@@ -14,7 +14,7 @@ class ConvultionLayer(Layer):
 
         self.depth = depth
         self.input_shape = input_shape
-        input_width, input_height, input_depth = input_shape
+        input_depth,input_width, input_height = input_shape
         self.input_depth = input_depth
         self.kernel_size = kernel_size
 
@@ -22,7 +22,7 @@ class ConvultionLayer(Layer):
         self.output_shape = (depth, (input_height - kernel_size + 1), (input_width - kernel_size + 1))
 
         # The depth of the kernels 
-        self.kernels_shape = (depth, input_depth, kernel_size, kernel_size)
+        self.kernels_shape = (depth, input_depth, kernel_size, kernel_size) 
 
         #Kernels and biases first set to be random. Needs to take the arguments rather than a tuple.
         self.kernels = np.random.randn(*self.kernels_shape)
@@ -38,10 +38,10 @@ class ConvultionLayer(Layer):
 
         for i in range(self.depth):
 
-            for j in range(self.input_depth):
+            for j in range(self.input_depth): 
 
                 # Output of the layer is the biases + the input cross correlated with the kernels
-                self.output[i] += signal.correlate2d(self.input[j], self.kernels[i, j], "valid")
+                self.output[i] += signal.correlate2d(self.input[:,:,j], self.kernels[i, j], "valid")
         
         return self.output
     
