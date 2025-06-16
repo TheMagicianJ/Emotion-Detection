@@ -4,15 +4,14 @@ from ConvolutionalLayer import ConvolutionLayer
 from Activations import RELU6
 
 
+class InvResBlock(Layer):
 
-class convR6():
+    def __init__(self, input_channels, output_channels, expansion_ratio):
 
-    def __init__(self, input_channels, output_channels,kernel_size,stride, expansion_ratio):
-         
+        expanded_input = input_channels * expansion_ratio
 
-         expanded_input = input_channels * expansion_ratio
+        layers = []
 
-         layers = []
 
         # 3 Phases
 
@@ -20,36 +19,39 @@ class convR6():
         # Firat layer should be a 1 by 1 point wise convolution of input depth only if the expanse ratio is not 1
         # With RELU6 activation
 
-         if expansion_ratio != 1 and input_channels == output_channels:
+        if expansion_ratio != 1:
             
             layers.extend([ConvolutionLayer(input_channels, kernel_size = 1, depth =  expanded_input),
                           RELU6()
                           ])
+        
+        layers.extend(
+            # Depthwise Convolution phase
+            # Second Layer should be a 3x3 depth-wise convolution of 1 depth
+            # With RELU6 activation
+            [ConvolutionLayer(input_channels, kernel_size = 3, depth = 1),
+            RELU6(),
 
+            # Projection Phase
+            # Third layer should be a 1x1 Convolution
+            ConvolutionLayer(input_channels, kernel_size = 1, depth = output_channels)]
+            
+            )
+        
+        self.layers = layers
 
-        # Depthwise Convolution phase
-        # Second Layer should be a 3x3 depth-wise convolution of 1 depth
-        # With RELU6 activation
-
-        # Projection Phase
-        # Third layer should be a 1x1 Convolution
-
-        pass
-
-
-class InvResBlock(Layer):
-
-    def __init__(self, input_channels, output_channels, expansion_ratio):
-
-
-
-        self.output_channels = output_channels
-
-
-    
+        
 
     def forward(self,input):
 
-        pass
+        output = input
 
-    def backward(self,output_gradient)
+        for layer in self.layers:
+           
+           output = layer.forward(output)
+
+        return output
+
+    def backward(self,output_grad,learning_rate):
+
+        pass
