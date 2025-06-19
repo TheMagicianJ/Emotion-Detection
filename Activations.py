@@ -18,6 +18,10 @@ class Tanh(Activation):
             # Super method to intialise the Activation with the functions
         super().__init__(tanh,inverse_tanh)
 
+        def test():
+
+            return
+
 
     # TO-DO: Need to implement the new activations for Inception and Effecicient. Sigmoidal?
     
@@ -50,6 +54,8 @@ class RELU6(Activation):
             pass
 
         super().__init__(forward, backward)
+
+        
             
         
 
