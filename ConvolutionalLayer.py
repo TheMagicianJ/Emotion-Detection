@@ -43,10 +43,10 @@ class ConvolutionLayer(Layer):
         
         self.output = np.copy(self.biases)
 
-        # Turn to Tensor (TO BE CHANGED)
+        # Turn to Tensor (TO BE CHANGED) 
         t_input = torch.from_numpy(self.input)
         t_kernels = torch.from_numpy(self.kernels)
-
+        
         for i in range(self.depth):
 
             for j in range(self.input_channels): 
