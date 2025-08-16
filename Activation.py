@@ -13,16 +13,17 @@ class Activation(Layer):
         self.activation_prime = activation_prime
 
         
-    def forward(self, input):
+    def forward(self, input: np.ndarray):
+        
         self.input = input
 
         return self.activation(self.input)
     
 
     
-    def backwards(self, output_gradient, learning_rate):
+    def backward(self, error_grad: np.ndarray, learning_rate: float):
         
-        return np.dot(output_gradient, self.activation_prime(self.input))
+        return self.activation_prime(error_grad)
 
 
 
